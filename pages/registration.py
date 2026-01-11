@@ -26,7 +26,7 @@ with col1:
     s_col1, s_col2 = st.columns([1, 1.5])
     with s_col1:
         # Session state નો ઉપયોગ કરીને તાત્કાલિક અપડેટ થશે
-        skill_selected = st.checkbox("Skilled Category", key="skill_check")
+        skill_selected = st.checkbox("Skill", key="skill_check")
     with s_col2:
         skill_rate = st.text_input(
             "Skilled Rate (Rs.)", 
@@ -38,7 +38,7 @@ with col1:
     # Unskill વિભાગ
     u_col1, u_col2 = st.columns([1, 1.5])
     with u_col1:
-        unskill_selected = st.checkbox("Unskilled Category", key="unskill_check")
+        unskill_selected = st.checkbox("Unskill", key="unskill_check")
     with u_col2:
         unskill_rate = st.text_input(
             "Unskilled Rate (Rs.)", 
