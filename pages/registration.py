@@ -27,7 +27,7 @@ with st.form("reg_form", clear_on_submit=True):
     submitted = st.form_submit_button("Register Now")
     
     if submitted:
-        if con_name and agency:
+        if con_name and category:
             if client:
                 try:
                     # 'Contractors' tab hovvu joie
