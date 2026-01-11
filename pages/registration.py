@@ -23,18 +23,17 @@ with st.form("reg_form", clear_on_submit=True):
         # Skill Sub line
         s_col1, s_col2 = st.columns([1,1])
         with s_col1:
-            Skill = st.checkbox("Skill")
+            skill_selected = st.checkbox("Skill")
         with s_col2:
-            Skill = st.text_input("Skill", min_value=0.0,placeholder="0",disabled=not Skill)
+            skill_rate = st.text_input("Skill", min_value=0.0,placeholder="0",disabled=not skill_selected)
         
         # Unskill Sub line
         u_col1, u_col2 = st.columns([1, 1])
         with u_col1:
-            Unskill = st.checkbox("Unskill")
+           unskill_selected = st.checkbox("Unskill")
         with u_col2:
-            Unskill = st.text_input("Unskill", min_value=0.0,placeholder="0",disabled=not Unskill)
-        
-        
+            unskill_rate = st.text_input("Unskill", min_value=0.0,placeholder="0",disabled=not unskill_selected)
+
     with col2:
         category = st.text_input("Category")
         
@@ -46,7 +45,7 @@ with st.form("reg_form", clear_on_submit=True):
                 try:
                     # 'Contractors' tab hovvu joie
                     sheet = client.open("DWCS TWT").worksheet("Contractors")
-                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category, Skill, Unskill]
+                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category, skill_rate, unskill_rate]
                     sheet.append_row(data)
                     st.success(f"✅ {con_name} Registered!")
                     st.balloons()
