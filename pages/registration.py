@@ -31,7 +31,7 @@ with st.form("reg_form", clear_on_submit=True):
                 try:
                     # 'Contractors' tab hovvu joie
                     sheet = client.open("DWCS TWT").worksheet("Contractors")
-                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category,]
+                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category]
                     sheet.append_row(data)
                     st.success(f"✅ {con_name} Registered!")
                     st.balloons()
