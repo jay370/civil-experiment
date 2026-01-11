@@ -43,13 +43,7 @@ def get_gspread_client():
 # --- APP UI ---
 st.title("Civil Site Experiment App")
 
-tab1,tab2 = st.tabs(["Registration","Daily Report"])
 
-with tab1:
-    show_registration()
-
-with tab2:
-    st.write("Fill the form below to log daily site data.")
 
 client = get_gspread_client()
 sheet = None
@@ -58,37 +52,12 @@ if client:
     try:
         # Sheet nu naam exact match thavu joie
         sheet = client.open("DWCS TWT").sheet1
-        st.sidebar.success("Connected to Google Sheet! ✅")
+        st.sidebar.success("Connected to Database ✅")
     except Exception as e:
         st.sidebar.error("Sheet 'DWCS TWT' nathi mali!")
         st.error(f"Error: {e}")
         st.info("Check karo: 1. Sheet naam 'DWCS TWT' che? 2. Email share karyo che?")
 
-# --- ENTRY FORM ---
-if sheet:
-    with st.form("entry_form", clear_on_submit=True):
-        st.subheader("Navi Data Entry")
-        
-        eng_name = st.selectbox("Engineer Name", ["Rahul", "Suresh", "Amit", "Jay"])
-        site_location = st.text_input("Site Location")
-        material_bags = st.number_input("Cement Bags", min_value=0, step=1)
-        remarks = st.text_area("Remarks (Optional)")
-        
-        submitted = st.form_submit_button("Submit Data")
-
-        if submitted:
-            if site_location == "":
-                st.warning("Please enter Site Location!")
-            else:
-                try:
-                    with st.spinner("Saving data..."):
-                        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                        data_row = [timestamp, eng_name, site_location, material_bags, remarks]
-                        sheet.append_row(data_row)
-                        st.success("Data successfully saved! 🚀")
-                        st.balloons()
-                except Exception as e:
-                    st.error(f"Data save nathi thayo: {e}")
 
     # Data Display
     if st.checkbox("Show Last 5 Entries"):
