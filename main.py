@@ -43,6 +43,10 @@ def get_gspread_client():
 # --- APP UI ---
 st.title("Civil Site Experiment App")
 
+#-- Page Navigation --- 
+if st.button("Contractor Registration"):
+    st.switch_page("pages.registration.py")
+
 
 
 client = get_gspread_client()
