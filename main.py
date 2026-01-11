@@ -14,7 +14,7 @@ st.write("Welcome! Use the sidebar or button below.")
 # Navigation Button
 if st.button("Contractor Registration Page par jao"):
     # Pages folder mate sacho path
-    st.switch_page("pages/registration.py")
+     st.switch_page("pages/registration.py")
 
 if client:
     st.sidebar.success("Database Connected ✅")
