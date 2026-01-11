@@ -44,6 +44,7 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
+    st.write("Contractor Registration Page ma redirect thavu joie...")
     
 
 
