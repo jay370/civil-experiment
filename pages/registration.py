@@ -25,14 +25,14 @@ with st.form("reg_form", clear_on_submit=True):
         with s_col1:
             Skill = st.checkbox("Skill")
         with s_col2:
-            Skill = st.number_input("Skill", min_value=0.0, format="%10f",placeholder="0",disabled=not Skill)
+            Skill = st.text_input("Skill", min_value=0.0,placeholder="0",disabled=not Skill)
         
         # Unskill Sub line
         u_col1, u_col2 = st.columns([1, 1])
         with u_col1:
             Unskill = st.checkbox("Unskill")
         with u_col2:
-            Unskill = st.number_input("Unskill", min_value=0.0, format="%1f",placeholder="0",disabled=not Unskill)
+            Unskill = st.text_input("Unskill", min_value=0.0,placeholder="0",disabled=not Unskill)
         
         
     with col2:
