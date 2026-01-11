@@ -19,8 +19,21 @@ with st.form("reg_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
         con_name = st.text_input("Contractor Name*")
-        Skill = st.checkbox("Skill")
-        Unskill = st.checkbox("Unskill")
+
+        # Skill Sub line
+        s_col1, s_col2 = st.columns([1,1])
+        with s_col1:
+            Skill = st.checkbox("Skill")
+        with s_col2:
+            Skill = st.number_input("Skill", min_value=0.0, format="%.2f",placeholder="0", disabled= not Skill)
+        
+        # Unskill Sub line
+        u_col1, u_col2 = st.columns([1, 1])
+        with u_col1:
+            Unskill = st.checkbox("Unskill")
+        with u_col2:
+            Unskill = st.number_input("Unskill", min_value=0.0, format="%.2f",placeholder="0", disabled= not Unskill)
+        
         
     with col2:
         category = st.text_input("Category")
