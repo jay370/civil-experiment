@@ -44,11 +44,8 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
-    st.write("Contractor Registration Page ma redirect thavu joie...")
+    st.switch_page("pages/registration.py")
     
-
-
-
 client = get_gspread_client()
 sheet = None
 
@@ -62,9 +59,7 @@ if client:
         st.error(f"Error: {e}")
         st.info("Check karo: 1. Sheet naam 'DWCS TWT' che? 2. Email share karyo che?")
 
-
 else:
-
     st.warning("Sheet sathe connection nathi, etle form nahi dekhay.")
 
 
