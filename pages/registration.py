@@ -54,37 +54,43 @@ with col2:
 
 st.divider()
 
-# સેવ કરવાનું બટન
+# આ કોડ "Register Now" બટન દબાવ્યા પછીના ભાગમાં મૂકવો
+
 if st.button("🚀 Register Now", use_container_width=True):
-    if con_name and category:
+    if con_name and category: # જરૂરી ફિલ્ડ્સ ચેક કરો
         if client:
             try:
-                # તમારી ગૂગલ શીટનું નામ "DWCS TWT" અને ટેબ "Contractors"
                 sheet = client.open("DWCS TWT").worksheet("Contractors")
                 
-                # રેટ નક્કી કરવા (જો ટીક ન હોય તો 0)
-                final_s_rate = skill_rate if st.session_state.skill_check else "0"
-                final_u_rate = unskill_rate if st.session_state.unskill_check else "0"
+                # લોજિક મુજબ ડેટા તૈયાર કરો
+                labour_type_1 = "Skill" if st.session_state.skill_check else ""
+                labour_type_2 = "Unskill" if st.session_state.unskill_check else ""
                 
-                # ગૂગલ શીટની 7 કોલમ મુજબનો ડેટા
+                # જો રેટ ખાલી હોય તો "0" અથવા યુઝરે લખેલ રેટ
+                s_rate = skill_rate if st.session_state.skill_check else "0"
+                u_rate = unskill_rate if st.session_state.unskill_check else "0"
+                
+                # તમારી 8 કોલમ મુજબનો ડેટા (લિસ્ટ)
                 data_to_save = [
-                    datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), # 1. તારીખ અને સમય
-                    str(con_name),    # 2. નામ
-                    str(category),    # 3. કેટેગરી
-                    str(final_s_rate),# 4. સ્કિલ્ડ રેટ
-                    str(final_u_rate),# 5. અનસ્કિલ્ડ રેટ
-                    str(location),    # 6. લોકેશન
-                    str(contact)      # 7. મોબાઈલ નંબર
+                    datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), # 1. Date_time
+                    str(con_name).upper(),                             # 2. NAME OF CONTRACTOR
+                    str(category).upper(),                             # 3. CATEGORY
+                    str(labour_type_1),                                # 4. TYPE OF LABOUR 1
+                    str(labour_type_2),                                # 5. TYPE OF LABOUR 2
+                    str(s_rate),                                       # 6. SKILL RATE
+                    str(u_rate),                                       # 7. UNSKILL RATE
+                    str(contact)                                       # 8. Mobile Number
                 ]
                 
+                # શીટમાં ડેટા ઉમેરો
                 sheet.append_row(data_to_save)
                 
-                st.success(f"સફળતાપૂર્વક નોંધણી થઈ ગઈ: {con_name}")
+                st.success(f"✅ {con_name} નો ડેટા સફળતાપૂર્વક ટેબલમાં સેવ થઈ ગયો છે!")
                 st.balloons()
                 
             except Exception as e:
-                st.error(f"શીટમાં ડેટા સેવ નથી થયો: {e}")
+                st.error(f"શીટમાં એરર આવી છે: {e}")
         else:
-            st.error("ગૂગલ શીટ સાથે કનેક્શન થઈ શક્યું નથી!")
+            st.error("ગૂગલ શીટ કનેક્શન મળતું નથી.")
     else:
-        st.warning("કૃપા કરીને નામ અને કેટેગરી જરૂરથી ભરો.")
+        st.warning("કૃપા કરીને કોન્ટ્રાક્ટરનું નામ અને કેટેગરી ભરો.")
