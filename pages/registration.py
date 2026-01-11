@@ -19,6 +19,11 @@ with st.form("reg_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
         con_name = st.text_input("Contractor Name*")
+        Type_of_labour = st.multiselect(
+            "Type of Labour",
+            ["Skilled", "Unskilled"],
+            default=None
+        )
         
     with col2:
         category = st.text_input("Category")
