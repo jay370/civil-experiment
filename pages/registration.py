@@ -20,17 +20,17 @@ with st.form("reg_form", clear_on_submit=True):
         # Skill Sub line
         s_col1, s_col2 = st.columns([1,1])
         with s_col1:
-            skill_selected = st.checkbox("Skill")
+            skill_selected = st.checkbox("Skill",key="s_check")
         with s_col2:
             # અહિયાં min_value કાઢી નાખ્યું છે કારણ કે તે text_input માં ન ચાલે
-            skill_rate = st.text_input("Skill Rate", placeholder="0", disabled=not skill_selected)
+            skill_rate = st.text_input("Skill Rate", placeholder="0", disabled=not st.session_state.s_check)
         
         # Unskill Sub line
         u_col1, u_col2 = st.columns([1, 1])
         with u_col1:
-           unskill_selected = st.checkbox("Unskill")
+           unskill_selected = st.checkbox("Unskill",key="u_check")
         with u_col2:
-            unskill_rate = st.text_input("Unskill Rate", placeholder="0", disabled=not unskill_selected)
+            unskill_rate = st.text_input("Unskill Rate", placeholder="0", disabled=not st.session_state.u_check)
 
     with col2:
         category = st.text_input("Category")
