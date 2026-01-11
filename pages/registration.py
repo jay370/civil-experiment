@@ -60,10 +60,19 @@ if st.button("🚀 Register Now", use_container_width=True):
     if con_name and category:
         if client:
             try:
-                # શીટ ઓપન કરો
                 sheet = client.open("DWCS TWT").worksheet("Contractors")
                 
-                # લોજિક મુજબ ડેટા તૈયાર કરો
+                # 1. VBA ની જેમ પહેલા ટેબલનું હેડર શોધો (ગમે ત્યાં હોય)
+                try:
+                    header_cell = sheet.find("NAME OF CONTRACTOR")
+                    header_row = header_cell.row
+                    header_col = header_cell.col
+                except:
+                    # જો હેડર ન મળે તો ડિફોલ્ટ પેલી રો ગણવી
+                    header_row = 1
+                    header_col = 1
+
+                # 2. ડેટા તૈયાર કરો (તમારી 8 કોલમ મુજબ)
                 l_type1 = "Skill" if st.session_state.skill_check else ""
                 l_type2 = "Unskill" if st.session_state.unskill_check else ""
                 s_rate = skill_rate if st.session_state.skill_check else "0"
@@ -80,14 +89,16 @@ if st.button("🚀 Register Now", use_container_width=True):
                     str(contact)
                 ]
 
-                # --- ટેબલમાં ડેટા નાખવાનો લોજિક ---
-                # આ ફંક્શન ગૂગલ શીટમાં 'MyContractorTable' નામનું ટેબલ શોધશે 
-                # અને તેને ગમે ત્યાં શિફ્ટ કરશો તો પણ તેની નીચે ડેટા ઉમેરશે.
-                sheet.append_row(data_to_save, 
-                                 value_input_option='USER_ENTERED', 
-                                 table_prefix='Contractors') 
+                # 3. VBA સ્ટાઇલ ઇન્સર્ટ (insert_row)
+                # આ ફંક્શન હેડરની નીચે નવી રો બનાવશે અને જૂનો ડેટા નીચે ધકેલશે
+                # આનાથી ટેબલની ફોર્મેટિંગ અને ફોર્મ્યુલા જળવાઈ રહેશે
+                sheet.insert_row(
+                    data_to_save, 
+                    index=header_row + 1, # હેડરની તરત નીચેની લાઈન
+                    value_input_option='USER_ENTERED'
+                )
                 
-                st.success(f"✅ {con_name} નો ડેટા ટેબલમાં સેવ થઈ ગયો!")
+                st.success(f"✅ {con_name} નો ડેટા ટેબલમાં 'Insert' થઈ ગયો છે!")
                 st.balloons()
                 
             except Exception as e:
