@@ -48,7 +48,7 @@ with col1:
         )
 
 with col2:
-    category = st.text_input("Work Category (e.g. Masonry, RCC)", placeholder="RCC, Plaster, etc.")
+    category = st.text_input("Work Category", placeholder="Shuttering,Steel,etc.")
     location = st.text_input("Location/City")
     contact = st.text_input("Contact Number")
 
