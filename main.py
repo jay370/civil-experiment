@@ -1,5 +1,5 @@
 import streamlit as st
-from pages.registration import show_registration # ragistaration module mathi import karo 
+ 
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
@@ -45,7 +45,7 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
-    st.switch_page("pages/registration.py")
+    st.switch_page("pages/registration")
 
 
 
