@@ -19,8 +19,8 @@ with st.form("reg_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
         con_name = st.text_input("Contractor Name*")
-       is_skilled = st.checkbox("Skilled")
-       is_unskilled = st.checkbox("Unskilled")
+        skilled = st.checkbox("Skilled")
+        unskilled = st.checkbox("Unskilled")
         
     with col2:
         category = st.text_input("Category")
@@ -33,7 +33,7 @@ with st.form("reg_form", clear_on_submit=True):
                 try:
                     # 'Contractors' tab hovvu joie
                     sheet = client.open("DWCS TWT").worksheet("Contractors")
-                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category,is_skilled, is_unskilled]
+                    data = [datetime.datetime.now().strftime("%d-%m-%Y"), con_name, category, skilled, unskilled]
                     sheet.append_row(data)
                     st.success(f"✅ {con_name} Registered!")
                     st.balloons()
