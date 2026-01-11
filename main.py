@@ -40,7 +40,7 @@ def get_gspread_client():
         return None
 
 # --- APP UI ---
-st.title("DAILY WAGES COST AND INTERNAL LABOUR SUPPLY")
+st.title("DAILY")
 
 client = get_gspread_client()
 sheet = None
