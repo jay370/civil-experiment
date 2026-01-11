@@ -12,7 +12,7 @@ st.title("🏗️ Civil Site Home Page")
 st.write("Welcome! Use the sidebar or button below.")
 
 # Navigation Button
-if st.button("Contractor Registration Page par jao"):
+if st.button("Contractor Registration"):
     # Pages folder mate sacho path
      st.switch_page("pages/registration.py")
 
