@@ -1,66 +1,75 @@
 import streamlit as st
-
+import registration  # registration.py file ne import karo
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
 
-# --- CONFIGURATION ---
+# --- 1. CONFIGURATION ---
 st.set_page_config(page_title="Civil Site App", layout="centered")
 
-# --- HIDE STREAMLIT ELEMENTS ---
+# --- 2. HIDE STREAMLIT ELEMENTS ---
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
             .stGithubIcon {display: none;}
-            /* Aa line Deploy (Paper Crane) icon ne hide karshe */
             .stDeployButton {display: none;} 
-            /* Aa line upar ni toolbar ne pura puri kadhi nakhshe */
             [data-testid="stToolbar"] {display: none;}
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-# --- GOOGLE SHEETS SCOPES ---
-SCOPES = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-]
+# --- 3. SESSION STATE (Page Control mate) ---
+if 'current_page' not in st.session_state:
+    st.session_state.current_page = 'Home'
 
-# --- CONNECTION FUNCTION ---
+# --- 4. GOOGLE SHEETS CONNECTION ---
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
+
 @st.cache_resource
 def get_gspread_client():
     try:
-        # Streamlit Secrets mathi data lese
         creds_info = st.secrets["gcp_service_account"]
         creds = Credentials.from_service_account_info(creds_info).with_scopes(SCOPES)
         return gspread.authorize(creds)
     except Exception as e:
-        st.error(f"Secrets Configuration ma bhul che: {e}")
+        st.error(f"Secrets Error: {e}")
         return None
 
-# --- APP UI ---
-st.title("Civil Site Experiment App")
-
-#-- Page Navigation --- 
-if st.button("Contractor Registration"):
-    st.switch_page("registration.py")
-    
 client = get_gspread_client()
-sheet = None
 
-if client:
-    try:
-        # Sheet nu naam exact match thavu joie
-        sheet = client.open("DWCS TWT").sheet1
+# --- 5. NAVIGATION LOGIC ---
+
+# --- PAGE 1: HOME ---
+if st.session_state.current_page == 'Home':
+    st.title("🏗️ Civil Site Experiment App")
+    
+    st.write("Welcome to the main dashboard.")
+    
+    # Button thi Registration page par java mate
+    if st.button("Contractor Registration Page par jao"):
+        st.session_state.current_page = 'Reg'
+        st.rerun() # Page refresh kari ne navi screen batavshe
+
+    # Database connectivity status check
+    if client:
         st.sidebar.success("Connected to Database ✅")
-    except Exception as e:
-        st.sidebar.error("Sheet 'DWCS TWT' nathi mali!")
-        st.error(f"Error: {e}")
-        st.info("Check karo: 1. Sheet naam 'DWCS TWT' che? 2. Email share karyo che?")
+    else:
+        st.sidebar.error("Database connection failed ❌")
 
-else:
-    st.warning("Sheet sathe connection nathi, etle form nahi dekhay.")
-
-
+# --- PAGE 2: REGISTRATION ---
+elif st.session_state.current_page == 'Reg':
+    # Back button home par pacha java mate
+    if st.button("← Back to Dashboard"):
+        st.session_state.current_page = 'Home'
+        st.rerun()
+    
+    st.divider()
+    
+    # Registration module mathi form load thase
+    # Khatri karjo ke registration.py ma 'show_registration()' function che
+    try:
+        registration.show_registration()
+    except AttributeError:
+        st.error("Error: 'registration.py' ma 'show_registration()' function nathi malyu!")
