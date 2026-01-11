@@ -44,7 +44,7 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
-    st.switch_page("pages/registration")
+    st.switch_page("Pages/registration")
     
 client = get_gspread_client()
 sheet = None
