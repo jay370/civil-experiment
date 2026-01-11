@@ -19,8 +19,9 @@ with st.form("reg_form", clear_on_submit=True):
     col1, col2 = st.columns(2)
     with col1:
         con_name = st.text_input("Contractor Name*")
-        category = st.text_input("Category")
+        
     with col2:
+        category = st.text_input("Category")
         mobile = st.text_input("Mobile Number")
         work_type = st.selectbox("Work Category", ["RCC", "Masonry", "Plaster", "Plumbing", "Electrical"])
     
