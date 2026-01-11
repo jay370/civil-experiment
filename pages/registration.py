@@ -23,25 +23,25 @@ with col1:
     st.write("---") # નાની લાઇન
     
     # Skill વિભાગ
-    s_col1, s_col2 = st.columns([1, 1.5])
+    s_col1, s_col2 = st.columns([1, 1])
     with s_col1:
         # Session state નો ઉપયોગ કરીને તાત્કાલિક અપડેટ થશે
         skill_selected = st.checkbox("Skill", key="skill_check")
     with s_col2:
         skill_rate = st.text_input(
-            "Skilled Rate (Rs.)", 
+            "Skill Rate (Rs.)", 
             placeholder="0", 
             disabled=not st.session_state.skill_check,
             key="s_rate_val"
         )
             
     # Unskill વિભાગ
-    u_col1, u_col2 = st.columns([1, 1.5])
+    u_col1, u_col2 = st.columns([1, 1])
     with u_col1:
         unskill_selected = st.checkbox("Unskill", key="unskill_check")
     with u_col2:
         unskill_rate = st.text_input(
-            "Unskilled Rate (Rs.)", 
+            "Unskill Rate (Rs.)", 
             placeholder="0", 
             disabled=not st.session_state.unskill_check,
             key="u_rate_val"
