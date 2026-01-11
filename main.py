@@ -59,16 +59,6 @@ if client:
         st.info("Check karo: 1. Sheet naam 'DWCS TWT' che? 2. Email share karyo che?")
 
 
-    # Data Display
-    if st.checkbox("Show Last 5 Entries"):
-        try:
-            data = sheet.get_all_records()
-            if data:
-                st.table(data[-5:])
-            else:
-                st.info("Sheet ma haju koi data nathi.")
-        except Exception as e:
-            st.error("Data fetch karva ma problem che.")
 else:
 
     st.warning("Sheet sathe connection nathi, etle form nahi dekhay.")
