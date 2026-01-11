@@ -1,4 +1,5 @@
 import streamlit as st
+import registration
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
@@ -44,7 +45,7 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
-    st.switch_page("Pages/registration")
+    st.switch_page("registration")
     
 client = get_gspread_client()
 sheet = None
