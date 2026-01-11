@@ -12,11 +12,11 @@ st.title("🏗️ Civil Site Home Page")
 st.write("Welcome! Use the sidebar or button below.")
 
 # Navigation Button
-if      st.button("Contractor Registration Page par jao"):
+if st.button("Contractor Registration Page par jao"):
     # Pages folder mate sacho path
     st.switch_page("pages/registration.py")
 
-if      client:
+if client:
     st.sidebar.success("Database Connected ✅")
 else:
     st.sidebar.error("Database Connection Failed ❌")
