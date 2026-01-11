@@ -1,4 +1,5 @@
 import streamlit as st
+from registration import show_registration # ragistaration module mathi import karo 
 import gspread
 from google.oauth2.service_account import Credentials
 import datetime
@@ -40,7 +41,15 @@ def get_gspread_client():
         return None
 
 # --- APP UI ---
-st.title("DAILY")
+st.title("Civil Site Experiment App")
+
+tab1,tab2 = st.tabs(["Registration","Daily Report"])
+
+with tab1:
+    show_registration()
+
+with tab2:
+    st.write("Fill the form below to log daily site data.")
 
 client = get_gspread_client()
 sheet = None
