@@ -45,7 +45,7 @@ st.title("Civil Site Experiment App")
 
 #-- Page Navigation --- 
 if st.button("Contractor Registration"):
-    st.switch_page("pages.registration.py")
+    st.switch_page("registration")
 
 
 
