@@ -9,7 +9,7 @@ client = get_gspread_client()
 
 # --- 3. HOME UI ---
 st.title("🏗️ Civil Site Home Page")
-st.write("Hello Ankit")
+st.write("Hello")
 
 # Navigation Button
 if st.button("Contractor Registration"):
