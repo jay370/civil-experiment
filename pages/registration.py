@@ -99,18 +99,18 @@ if st.button("🚀 Register Now", use_container_width=True):
                     value_input_option='USER_ENTERED'
                 )
 
-            st.session_state.con_name_val = ""
-            st.session_state.category_val = ""
-            st.session_state.location_val = ""
-            st.session_state.contact_val = ""
-            st.session_state.s_rate_val = "0"
-            st.session_state.u_rate_val = "0"
-            st.session_state.skill_check_val = False
-            st.session_state.unskill_check_val = False
-            st.success(f"✅ {con_name} નો ડેટા ટેબલમાં 'Insert' થઈ ગયો છે!")
-            st.balloons()
+                st.session_state.con_name_val = ""
+                st.session_state.category_val = ""
+                st.session_state.location_val = ""
+                st.session_state.contact_val = ""
+                st.session_state.s_rate_val = "0"
+                st.session_state.u_rate_val = "0"
+                st.session_state.skill_check_val = False
+                st.session_state.unskill_check_val = False
+                st.success(f"✅ {con_name} નો ડેટા ટેબલમાં 'Insert' થઈ ગયો છે!")
+                st.balloons()
 
-            st.rerun()
+                st.rerun()
                 
-        except Exception as e:
-            st.error(f"Error: {e}")
+            except Exception as e:
+                st.error(f"Error: {e}")
