@@ -2,6 +2,7 @@ import streamlit as st
 import datetime
 from connection import get_gspread_client
 
+
 # પેજ ટાઈટલ
 st.title("🏗️ Contractor Registration")
 
