@@ -19,7 +19,7 @@ client = get_gspread_client()
 col1, col2 = st.columns(2)
 
 with col1:
-    con_name = st.text_input("Contractor Name*", placeholder="Enter Name")
+    con_name = st.text_input("Contractor Name*", placeholder="Enter Name",Key ="con_name_val")
     
     st.write("---") # નાની લાઇન
     
@@ -27,7 +27,7 @@ with col1:
     s_col1, s_col2 = st.columns([0.75, 0.75])
     with s_col1:
         # Session state નો ઉપયોગ કરીને તાત્કાલિક અપડેટ થશે
-        skill_selected = st.checkbox("Skill", key="skill_check")
+        skill_selected = st.checkbox("Skill", key="skill_check",key = "skill_check_val")
     with s_col2:
         skill_rate = st.text_input(
             "Skill Rate (Rs.)", 
@@ -39,7 +39,7 @@ with col1:
     # Unskill વિભાગ
     u_col1, u_col2 = st.columns([0.75, 0.75])
     with u_col1:
-        unskill_selected = st.checkbox("Unskill", key="unskill_check")
+        unskill_selected = st.checkbox("Unskill", key="unskill_check",key = "unskill_check_val")
     with u_col2:
         unskill_rate = st.text_input(
             "Unskill Rate (Rs.)", 
@@ -49,9 +49,9 @@ with col1:
         )
 
 with col2:
-    category = st.text_input("Work Category", placeholder="Shuttering,Steel,etc.")
-    location = st.text_input("Location/City")
-    contact = st.text_input("Contact Number")
+    category = st.text_input("Work Category", placeholder="Shuttering,Steel,etc.", key = "category_val")
+    location = st.text_input("Location/City", placeholder="Enter Location", key = "location_val")
+    contact = st.text_input("Contact Number", placeholder="Enter Contact No.", key = "contact_val")
 
 st.divider()
 
@@ -98,9 +98,19 @@ if st.button("🚀 Register Now", use_container_width=True):
                     index=header_row + 1, # હેડરની તરત નીચેની લાઈન
                     value_input_option='USER_ENTERED'
                 )
+
+            st.session_state.name_val = ""
+            st.session_state.cat_val = ""
+            st.session_state.loc_val = ""
+            st.session_state.con_val = ""
+            st.session_state.s_rate_val = "0"
+            st.session_state.u_rate_val = "0"
+            st.session_state.skill_check = False
+            st.session_state.unskill_check = False
+            st.success(f"✅ {con_name} નો ડેટા ટેબલમાં 'Insert' થઈ ગયો છે!")
+            st.balloons()
+
+            st.return()
                 
-                st.success(f"✅ {con_name} નો ડેટા ટેબલમાં 'Insert' થઈ ગયો છે!")
-                st.balloons()
-                
-            except Exception as e:
-                st.error(f"Error: {e}")
+        except Exception as e:
+            st.error(f"Error: {e}")
