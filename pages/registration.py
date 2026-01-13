@@ -48,6 +48,7 @@ with col2:
 
 st.divider()
 
+
 if st.button("🚀 Register Now", use_container_width=True):
     if con_name and category:
         if client:
