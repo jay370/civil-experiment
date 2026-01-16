@@ -9,7 +9,7 @@ client = get_gspread_client()
 
 # --- 3. HOME UI ---
 st.title("🏗️ Civil Site Home Page")
-st.write("Hello ankit")
+st.write("Hello Dipak Sir")
 
 # Navigation Button
 if st.button("Contractor Registration"):
@@ -19,4 +19,5 @@ if st.button("Contractor Registration"):
 if client:
     st.sidebar.success("Database Connected ✅")
 else:
+
     st.sidebar.error("Database Connection Failed ❌")
