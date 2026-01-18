@@ -43,7 +43,7 @@ st.markdown("""
             color: #28A745;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
-            background-color: #F8F9FA;
+            background-color: #ffffff;
             padding: 5px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
