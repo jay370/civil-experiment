@@ -15,7 +15,7 @@ st.markdown("""
             /* Remove Page Padding */
             .block-container {
             padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-bottom: 0rem;
             padding-left: 1rem;
             padding-right: 1rem;
             } 
@@ -44,6 +44,7 @@ st.markdown("""
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #ffffff;
+            margin-top: 20px;
             padding: 5px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
