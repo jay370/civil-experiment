@@ -33,7 +33,7 @@ st.markdown("""
             margin-bottom: 20px;
             }
             div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
-            gap: 0.1rem !important;
+            gap: 50px !important;
             }
             /* Ragister Button-feel  like Apple Button */
             .stButton>button {
