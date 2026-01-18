@@ -38,5 +38,15 @@ st.markdown("""
             }
 </style> """, unsafe_allow_html=True)
 
-st.title("Contractor Registration")
-
+st.markdown("""
+            <h2 style="text-align: center; 
+            color: #333333;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 800;
+            background-color: #f0f2f6;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-bottom: 5px solid #007aff;
+            ">Contractor Registration</h2>
+""", unsafe_allow_html=True)
