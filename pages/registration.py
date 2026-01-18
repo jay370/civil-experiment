@@ -40,7 +40,7 @@ st.markdown("""
 
 st.markdown("""
             <h2 style="text-align: center; 
-            color: #444444;
+            color: #111827;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #f2f5f9;
