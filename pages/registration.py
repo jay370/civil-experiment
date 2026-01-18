@@ -48,5 +48,5 @@ st.markdown("""
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
             border-bottom: 5px solid #007aff;
-            ">Contractor Registration</h2>
+            ">Contractor</h2>
 """, unsafe_allow_html=True)
