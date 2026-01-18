@@ -44,8 +44,8 @@ st.markdown("""
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #f2f5f9;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 5px;
+            border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
             border-bottom: 5px solid #007aff;
             ">Contractor Registration</h2>
