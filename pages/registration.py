@@ -14,10 +14,10 @@ st.markdown("""
 
             /* Remove Page Padding */
             .block-container {
-            padding-top: 2rem;
-            padding-bottom: 0rem;
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            padding-left: 0.5rem !important;
+            padding-right: 0.5rem !important;
             } 
             /* Background Color Same Like Mobile App */
             .stApp {
@@ -44,7 +44,7 @@ st.markdown("""
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #ffffff;
-            margin-top: 20px;
+            margin-top: 0px;
             padding: 5px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
