@@ -21,7 +21,7 @@ st.markdown("""
             } 
             /* Background Color Same Like Mobile App */
             .stApp {
-                background-color: #f0f2f6;
+                background-color: #007AFF;
             }
             /* Ragister Button-feel  like Apple Button */
             .stButton>button {
