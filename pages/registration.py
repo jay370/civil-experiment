@@ -14,7 +14,7 @@ st.markdown("""
 
             /* Remove Page Padding */
             .block-container {
-            padding-top: 0.5rem !important;
+            padding-top: 0.1rem !important;
             padding-bottom: 0.5rem !important;
             padding-left: 0.5rem !important;
             padding-right: 0.5rem !important;
@@ -45,7 +45,7 @@ st.markdown("""
             font-weight: 800;
             background-color: #ffffff;
             margin-top: 0px;
-            padding: 5px;
+            padding: 0px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
             border-bottom: 5px solid #007aff;
