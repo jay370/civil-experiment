@@ -41,7 +41,7 @@ st.markdown("""
 st.markdown("""
             <h2 style="text-align: center; 
             color: #28A745;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #ffffff;
             border-radius: 5px;
@@ -49,4 +49,3 @@ st.markdown("""
             border-bottom: 5px solid #007aff;
             ">Contractor Registration</h2>
 """, unsafe_allow_html=True)
-st.write("Please fill in the details below to register as a contractor.")
