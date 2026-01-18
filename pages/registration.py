@@ -25,13 +25,15 @@ st.markdown("""
             }
             /*Rectangle Box (card) ni style */
             div[data-testid="stVerticalBlockBorderWrapper"] {
-            gap: 0.1rem !important;
             background-color: #ffffff;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border: none !important;
             margin-bottom: 20px;
+            }
+            div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
+            gap: 0.1rem !important;
             }
             /* Ragister Button-feel  like Apple Button */
             .stButton>button {
