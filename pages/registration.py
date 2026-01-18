@@ -44,7 +44,7 @@ st.markdown("""
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 800;
             background-color: #ffffff;
-            margin-top: 0px;
+            margin-top: 50px;
             padding: 0px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
