@@ -14,7 +14,7 @@ st.markdown("""
 
             /* Remove Page Padding */
             .block-container {
-            padding-top: 0.1rem !important;
+            padding-top: 5px !important;
             padding-bottom: 0.5rem !important;
             padding-left: 0.5rem !important;
             padding-right: 0.5rem !important;
