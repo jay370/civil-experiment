@@ -25,6 +25,7 @@ st.markdown("""
             }
             /*Rectangle Box (card) ni style */
             div[data-testid="stVerticalBlockBorderWrapper"] {
+            gap: 0.5rem !important;
             background-color: #ffffff;
             border-radius: 15px;
             padding: 20px;
