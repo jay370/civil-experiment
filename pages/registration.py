@@ -45,6 +45,7 @@ st.markdown("""
                 font-size: 1.2em;
                 font-weight: bold;
                 box-shadow: 0px 4px 12px rgba(0, 122, 255, 0, 0.3);
+
                 border: none;
             }
 
@@ -71,4 +72,5 @@ with st.container(border=True):
     con_billname = st.text_input("Contractor Bill Name*",key="con_billname", placeholder="Enter Bill Name")
     con_cat = st.text_input("Contractor Category*",key="con_cat", placeholder="Enter Category")
     con_phone = st.text_input("Contractor Phone Number*",key="con_phone", placeholder="Enter Phone Number")
+    con_email = st.text_input("Contractor Email ID*",key="con_email", placeholder="Enter Email ID")
 
