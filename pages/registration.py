@@ -74,5 +74,5 @@ with st.container(border=True):
     con_phone = st.text_input("Contractor Phone Number*",key="con_phone", placeholder="Enter Phone Number")
     con_email = st.text_input("Contractor Email ID*",key="con_email", placeholder="Enter Email ID")
     con_gst = st.text_input("Contractor GST Number*",key="con_gst", placeholder="Enter GST Number")
-    con_pan = st.text_input("Contractor PAN Number*",key="con_pan", placeholder
+    con_pan = st.text_input("Contractor PAN Number*",key="con_pan", placeholder="Enter PAN Number")
 
