@@ -80,7 +80,8 @@ with tab1:
     #--- This is Ractangle Box (Card) ---
     with st.container(border=True): 
         con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
-        con_worktype = st.text_input("Contractor Work Type*",key="con_worktype", placeholder="Enter Work Type")
+        work_Option =["Regular","Naka"]
+        con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Select Work Type")
         con_cat = st.text_input("Contractor Category*",key="con_cat", placeholder="Enter Category")
         con_phone = st.text_input("Contractor Phone Number*",key="con_phone", placeholder="Enter Phone Number")
 
