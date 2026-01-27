@@ -82,7 +82,8 @@ with tab1:
         con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
         work_Option =["Regular","Naka"]
         con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
-        con_cat = st.text_input("Contractor Category*",key="con_cat", placeholder="Enter Category")
+        category_Option =["Shuttering","Steel","Exposed and Rendering","Unskill","Concrete"]
+        con_cat = st.selectbox("Contractor Category*",key="con_cat", options=category_Option, index=None, help="Select Category")
         con_phone = st.text_input("Contractor Phone Number*",key="con_phone", placeholder="Enter Phone Number")
 
 with tab2:
