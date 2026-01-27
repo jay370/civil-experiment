@@ -12,6 +12,8 @@ st.markdown("""
             Header {visibility: hidden;}
             footer {visibility: hidden;}
 
+            
+
             /* Remove Page Padding */
             .block-container {
             padding-top: 0rem !important;
