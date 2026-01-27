@@ -84,8 +84,11 @@ with tab1:
         con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
         category_Option =["Shuttering","Steel","Exposed and Rendering","Unskill","Concrete"]
         con_cat = st.selectbox("Contractor Category*",key="con_cat", options=category_Option, index=None, help="Select Category",placeholder="Select Category")
-        con_phone = st.text_input("Contractor Phone Number*",key="con_phone", placeholder="Enter Phone Number")
-
+        col1, col2 = st.columns([1,2]) #[checkox ni jagya,Text box ni jagya]
+        with col1:
+            skill_check =st.checkbox("Skill",key="skill_Check")
+        with col2:
+            skill_rate = st.number_input("Skill Rate*",key="skill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not skill_check, placeholder="Enter Skill Rate")
 with tab2:
     st.markdown("### Register Contractor Bank Details")
 
