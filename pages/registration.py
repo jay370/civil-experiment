@@ -84,7 +84,7 @@ with tab1:
         con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
         category_Option =["Shuttering","Steel","Exposed and Rendering","Unskill","Concrete"]
         con_cat = st.selectbox("Contractor Category*",key="con_cat", options=category_Option, index=None, help="Select Category",placeholder="Select Category")
-        col1, col2 = st.columns([0.5,2.5]) #[checkox ni jagya,Text box ni jagya]
+        col1, col2 = st.columns([1,2]) #[checkox ni jagya,Text box ni jagya]
         with col1:
             skill_check =st.checkbox("Skill",key="skill_Check")
         with col2:
@@ -94,6 +94,10 @@ with tab1:
             unskill_check =st.checkbox("Unskill",key="unskill_Check")
         with col4:
             unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
+            
+st.write("---")  # Horizontal line between tabs
+if st.button("Register Contractor",use_container_width=True):
+    st.success("Contractor Registered Successfully!")
 with tab2:
     st.markdown("### Register Contractor Bank Details")
 
