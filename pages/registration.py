@@ -12,7 +12,7 @@ st.markdown("""
             Header {visibility: hidden;}
             footer {visibility: hidden;}
 
-            
+
 
             /* Remove Page Padding */
             .block-container {
@@ -36,6 +36,11 @@ st.markdown("""
             }
             div[data-testid="stVerticalBlockBorderWrapper"] [data-testid="stVerticalBlock"] {
             gap: 0.1rem !important;
+            }
+            /*Lable and box vache ni space control */
+            div[data-testid="stwidgetLabel"] p{
+            margin-bottom: -20px !important;
+            font-size: 16px;
             }
             /* Ragister Button-feel  like Apple Button */
             .stButton>button {
