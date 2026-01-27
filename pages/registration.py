@@ -71,9 +71,16 @@ st.markdown("""
             ">Contractor Registration</h2>
 """, unsafe_allow_html=True)
 
-#--- This is Ractangle Box (Card) ---
-with st.container(border=True):
-    st.markdown("<h4 style='color: #000000; font-family: Arial, sans-serif; font-size: 20px; font-weight: 600;'>Personal Details</h4>", unsafe_allow_html=True)
+
+
+#-- Tabs for Input Fields --
+tab1, tab2 = st.tabs(["Basic Details", "Bank Details"])
+
+with tab1:
+    #--- This is Ractangle Box (Card) ---
+    with st.container(border=True):
+        st.markdown("<h4 style='color: #000000; font-family: Arial, sans-serif; font-size: 20px; font-weight: 600;'>Personal Details</h4>", unsafe_allow_html=True)
+
     #--text input fields--
     con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
     con_billname = st.text_input("Contractor Bill Name*",key="con_billname", placeholder="Enter Bill Name")
@@ -82,4 +89,7 @@ with st.container(border=True):
     con_email = st.text_input("Contractor Email ID*",key="con_email", placeholder="Enter Email ID")
     con_gst = st.text_input("Contractor GST Number*",key="con_gst", placeholder="Enter GST Number")
     con_pan = st.text_input("Contractor PAN Number*",key="con_pan", placeholder="Enter PAN Number")
+
+with tab2:
+    st.markdown("### Register Contractor Bank Details")
 
