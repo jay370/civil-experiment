@@ -89,9 +89,10 @@ with tab1:
             skill_check =st.checkbox("Skill",key="skill_Check")
         with col2:
             skill_rate = st.number_input("Skill Rate*",key="skill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not skill_check, placeholder="Enter Skill Rate")
+        col3, col4 = st.columns([1,2]) #[checkox ni jagya,Text box ni jagya]
         with col3:
             unskill_check =st.checkbox("Unskill",key="unskill_Check")
-        with col2:
+        with col4:
             unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
 with tab2:
     st.markdown("### Register Contractor Bank Details")
