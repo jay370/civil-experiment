@@ -52,10 +52,20 @@ st.markdown("""
                 font-size: 1.2em;
                 font-weight: bold;
                 box-shadow: 0px 4px 12px rgba(0, 122, 255, 0, 0.3);
-
                 border: none;
             }
-
+            /*Number Inpute Box +/- Button Hide*/
+            button[step="1"] {
+                display: none !important;
+            }
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+                margin: 0 !important;
+            }
+            input[type="number"] {
+                -moz-appearance: textfield !important;
+            }
 </style> """, unsafe_allow_html=True)
 
 st.markdown("""
@@ -79,7 +89,14 @@ tab1, tab2 = st.tabs(["Basic Details", "Bank Details"])
 with tab1:
     #--- This is Ractangle Box (Card) ---
     with st.container(border=True): 
-        con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
+        con_vendercode = st.number_input("Contractor Vender Code*",key="con_vendercode", placeholder="Enter Contractor Vender Code")
+        col1,col2,col3 = st.columns([4,1,4])
+        with col1:
+             con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
+        with col2:
+             st.markdown("<br><p style='text-align: center; font-weight: white; font-size: 25px;'>AKA</p>", unsafe_allow_html=True)
+        with col3:
+            con_Billname = st.text_input("Contractor Bill Name",key="con_Billname", placeholder="Enter Contractor Bill Name")
         work_Option =["Regular","Naka"]
         con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
         category_Option =["Shuttering","Steel","Exposed and Rendering","Unskill","Concrete"]
@@ -94,10 +111,19 @@ with tab1:
             unskill_check =st.checkbox("Unskill",key="unskill_Check")
         with col4:
             unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
-            
-st.write("---")  # Horizontal line between tabs
+ #1 Ragister Button           
 if st.button("Register Contractor",use_container_width=True):
-    st.success("Contractor Registered Successfully!")
-with tab2:
+    #2 Validation for Required Fields
+    if not st.session_state.get("con_vendercode") or not st.session_state.get("con_sitename") or not st.session_state.get("con_worktype") or not st.session_state.get("con_cat"):
+        st.error("Please fill all required fields in Basic Details.")
+    else:
+    #3 Loding Message
+        with st.spinner("All Data Save in DataBase..."):
+            import time
+            time.sleep(2)  # Simulate a delay for saving data       
+            st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
+            st.balloons()   
+        
+with tab2:  
     st.markdown("### Register Contractor Bank Details")
 
