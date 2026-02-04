@@ -192,10 +192,17 @@ if st.button("Register Contractor",use_container_width=True):
         with st.spinner("All Data Save in DataBase..."):
             is_saved = save_contractor_smart()
             if is_saved:
-                st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
+                #st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
-                
-                st.rerun()  # form submit thaya pachi page ne refresh karva mate
+                keys_to_reset = ["con_vendercode", "con_sitename", "con_Billname", "con_worktype", "con_cat", "skill_Check", "skill_rate", "unskill_Check", "unskill_rate"]
+                for key in keys_to_reset:
+                    if key in st.session_state:
+                        if "rate" in key:
+                            st.session_state[key] = 0.0
+                        elif "Check" in key:
+                            st.session_state[key] = False
+                        else:
+                            st.session_state[key] = ""
             else:
                 st.error("Failed to register contractor. Please try again.")  
