@@ -120,6 +120,8 @@ def save_contractor_smart():
         
         labour_1 ="SKILL" if st.session_state.get("skill_Check") else ""
         labour_2 ="UNSKILL" if st.session_state.get("unskill_Check") else ""
+        s_rate = st.session_state.get("skill_rate") if st.session_state.get("skill_Check") !=0 else ""
+        u_rate = st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") !=0 else ""  
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
             st.session_state.get("con_vendercode"),
@@ -129,8 +131,8 @@ def save_contractor_smart():
             st.session_state.get("con_cat"),
             labour_1, #'True' na badle 'Skill' or khali jagaya ma sae thasehe
             labour_2, #'True' na badle 'Unskill' or khali jagaya ma sae thasehe
-            st.session_state.get("skill_rate") if st.session_state.get("skill_Check") else 0,
-            st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") else 0
+            s_rate, # jo 0 hashe to ahi "" save thasehe
+            u_rate # jo 0 hashe to ahi "" save thasehe
         ]
         # VBA na Rows(2).Insert logic jevu kaam:
         # Aa command 2nd number ni row (Header ni turant niche) navi row umero ane data muko
