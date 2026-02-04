@@ -195,14 +195,11 @@ if st.button("Register Contractor",use_container_width=True):
                 #st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
-                keys_to_reset = ["con_vendercode", "con_sitename", "con_Billname", "con_worktype", "con_cat", "skill_Check", "skill_rate", "unskill_Check", "unskill_rate"]
-                for key in keys_to_reset:
-                    if key in st.session_state:
-                        if "rate" in key:
-                            st.session_state[key] = 0.0
-                        elif "Check" in key:
-                            st.session_state[key] = False
-                        else:
-                            st.session_state[key] = ""
+                connected = st.session_state.get('connected_shown', False)
+                st.session_state.clear() 
+                st.session_state.connected_shown = connected
+                import time
+                time.sleep(1)
+                st.rerun()
             else:
                 st.error("Failed to register contractor. Please try again.")  
