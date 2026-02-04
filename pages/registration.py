@@ -185,7 +185,7 @@ with tab1:
             st.number_input("Unskill Rate*", key=f"u_rate_{ver}", min_value=0.0, format="%.2f", step=0.50, disabled=not st.session_state.get(f"unskill_chk_{ver}"), placeholder="Enter Unskill Rate")
 
 # 1 Register Button           
-if st.button("Register Contractor", use_container_width=True):
+    if st.button("Register Contractor", use_container_width=True):
     ver = st.session_state.form_version
     # 2 Validation for Required Fields
     if not st.session_state.get(f"vcode_{ver}") or not st.session_state.get(f"site_{ver}") or not st.session_state.get(f"wtype_{ver}") or not st.session_state.get(f"cat_{ver}"):
@@ -205,8 +205,8 @@ if st.button("Register Contractor", use_container_width=True):
             else:
                 st.error("Failed to register contractor. Please try again.")  
 
-# ૧. Reset બટન (બધા ખાના ખાલી કરવા માટે)
-if st.button("Reset Form", use_container_width=True):
+    # ૧. Reset બટન (બધા ખાના ખાલી કરવા માટે)
+    if st.button("Reset Form", use_container_width=True):
     # Version badlvathi Streamlit badha widget ne nava ganashe ane khali kari deshe
-    st.session_state.form_version += 1
-    st.rerun()
+        st.session_state.form_version += 1
+        st.rerun()
