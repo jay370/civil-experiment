@@ -1,18 +1,22 @@
-
 import streamlit as st
 from connection import get_gspread_client
 import datetime
 
-#a Line USe karvi varmvar raun Nahi thay
+# --- Form Reset Logic (Top Level) ---
+if "form_version" not in st.session_state:
+    st.session_state.form_version = 0
+
+# a Line USe karvi varmvar raun Nahi thay
 @st.cache_resource(show_spinner="Connecting to Database...")
 def check_connection():
     try:
-       client = get_gspread_client()
-       sheet = client.open("DWCS TWT").worksheet("Contractors")
-       return True, "Connected to Database successfully!"
+        client = get_gspread_client()
+        sheet = client.open("DWCS TWT").worksheet("Contractors")
+        return True, "Connected to Database successfully!"
     except Exception as e:
-       return False, f"Connection failed: {e}"
-is_connected,msg = check_connection()
+        return False, f"Connection failed: {e}"
+
+is_connected, msg = check_connection()
 
 if is_connected and 'connected_shown' not in st.session_state:
     st.session_state.connected_shown = True
@@ -22,18 +26,15 @@ elif not is_connected:
     st.info("Please check your Google Cloud credentials and internet connection.")
 
 # page setup for Mobile Look
-st.set_page_config(page_title="Contractor Registration", layout="centered",initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Contractor Registration", layout="centered", initial_sidebar_state="collapsed")
 
 # css For styling of Page
-
 st.markdown("""
     <style>
             /* Top Lal Bar Remove */
             MainMenu {visibility: hidden;}
             Header {visibility: hidden;}
             footer {visibility: hidden;}
-
-
 
             /* Remove Page Padding */
             .block-container {
@@ -107,108 +108,105 @@ st.markdown("""
             ">Contractor Registration</h2>
 """, unsafe_allow_html=True)
 
-
 #-- Tabs for Input Fields --
 tab1, tab2 = st.tabs(["Basic Details", "Bank Details"])
-
-
 
 def save_contractor_smart():
     try:
         client = get_gspread_client()
         sheet = client.open("DWCS TWT").worksheet("Contractors")  # Sheet name
         
-        #1. table na Badha j record leshe header Mujab
-        # Sheet ma Niche Navu table Hashe to vadho Nahi ave
+        # 1. table na Badha j record leshe header Mujab
         all_records = sheet.get_all_records()
         
-        #2.Duplicate Vender Code Check karvo
-        new_code = str(st.session_state.get("con_vendercode"))
+        # 2. Duplicate Vender Code Check karvo (Current Version Key sathe)
+        ver = st.session_state.form_version
+        new_code = str(st.session_state.get(f"vcode_{ver}"))
         
-        #3list comprehension thi duplicate code check karvo
+        # 3. list comprehension thi duplicate code check karvo
         is_Duplicate = any(str(record.get("Vender Code", "")) == str(new_code) for record in all_records)
         
         if is_Duplicate:
             st.warning(f"Vender Code {new_code} already exists. Please use a unique Vender Code.")
             return False
         
-        labour_1 ="SKILL" if st.session_state.get("skill_Check") else ""
-        labour_2 ="UNSKILL" if st.session_state.get("unskill_Check") else ""
-        s_rate = st.session_state.get("skill_rate") if st.session_state.get("skill_Check") and st.session_state.get("skill_rate") != 0 else ""
-        u_rate = st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") and st.session_state.get("unskill_rate") != 0 else ""
+        labour_1 = "SKILL" if st.session_state.get(f"skill_chk_{ver}") else ""
+        labour_2 = "UNSKILL" if st.session_state.get(f"unskill_chk_{ver}") else ""
+        
+        s_rate = st.session_state.get(f"s_rate_{ver}") if st.session_state.get(f"skill_chk_{ver}") and st.session_state.get(f"s_rate_{ver}") != 0 else ""
+        u_rate = st.session_state.get(f"u_rate_{ver}") if st.session_state.get(f"unskill_chk_{ver}") and st.session_state.get(f"u_rate_{ver}") != 0 else ""
+        
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
             new_code,
-            st.session_state.get("con_sitename", "").upper().strip(),
-            st.session_state.get("con_Billname", "").upper().strip(),
-            st.session_state.get("con_worktype", "").upper().strip(),
-            st.session_state.get("con_cat", "").upper().strip(),
-            labour_1, #'True' na badle 'Skill' or khali jagaya ma sae thasehe
-            labour_2, #'True' na badle 'Unskill' or khali jagaya ma sae thasehe
-            s_rate, # jo 0 hashe to ahi "" save thasehe
-            u_rate # jo 0 hashe to ahi "" save thasehe
+            st.session_state.get(f"site_{ver}", "").upper().strip(),
+            st.session_state.get(f"bill_{ver}", "").upper().strip(),
+            st.session_state.get(f"wtype_{ver}", "").upper().strip() if st.session_state.get(f"wtype_{ver}") else "",
+            st.session_state.get(f"cat_{ver}", "").upper().strip() if st.session_state.get(f"cat_{ver}") else "",
+            labour_1,
+            labour_2,
+            s_rate,
+            u_rate
         ]
-        # VBA na Rows(2).Insert logic jevu kaam:
-        # Aa command 2nd number ni row (Header ni turant niche) navi row umero ane data muko
+        
         sheet.insert_row(new_row, index=2, value_input_option='USER_ENTERED')
         return True
     except Exception as e:
         st.error(f"Error saving data to Google Sheets: {e}")
         return False    
-    
-
-
 
 with tab1:
+    ver = st.session_state.form_version
     #--- This is Ractangle Box (Card) ---
     with st.container(border=True): 
-        con_vendercode = st.number_input("Contractor Vender Code*",key="con_vendercode", placeholder="Enter Contractor Vender Code")
-        col1,col2 = st.columns([1,1])
+        st.number_input("Contractor Vender Code*", key=f"vcode_{ver}", placeholder="Enter Contractor Vender Code")
+        col1, col2 = st.columns([1,1])
         with col1:
-             con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
+             st.text_input("Contractor Site Name*", key=f"site_{ver}", placeholder="Enter Contractor Site Name")
         with col2:
-            con_Billname = st.text_input("Contractor Bill Name",key="con_Billname", placeholder="Enter Contractor Bill Name")
-        work_Option =["Regular","Naka"]
-        con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
-        category_Option =["Shuttering","Steel","Exposed and Rendering","Unskill","Concrete"]
-        con_cat = st.selectbox("Contractor Category*",key="con_cat", options=category_Option, index=None, help="Select Category",placeholder="Select Category")
-        col1, col2 = st.columns([1,2]) #[checkox ni jagya,Text box ni jagya]
+            st.text_input("Contractor Bill Name", key=f"bill_{ver}", placeholder="Enter Contractor Bill Name")
+        
+        work_Option = ["Regular", "Naka"]
+        st.selectbox("Contractor Work Type*", key=f"wtype_{ver}", options=work_Option, index=None, help="Regular or Naka Work Type")
+        
+        category_Option = ["Shuttering", "Steel", "Exposed and Rendering", "Unskill", "Concrete"]
+        st.selectbox("Contractor Category*", key=f"cat_{ver}", options=category_Option, index=None, help="Select Category", placeholder="Select Category")
+        
+        col1, col2 = st.columns([1,2])
         with col1:
-            skill_check =st.checkbox("Skill",key="skill_Check")
+            st.checkbox("Skill", key=f"skill_chk_{ver}")
         with col2:
-            skill_rate = st.number_input("Skill Rate*",key="skill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not skill_check, placeholder="Enter Skill Rate")
-        col3, col4 = st.columns([1,2]) #[checkox ni jagya,Text box ni jagya]
+            st.number_input("Skill Rate*", key=f"s_rate_{ver}", min_value=0.0, format="%.2f", step=0.50, disabled=not st.session_state.get(f"skill_chk_{ver}"), placeholder="Enter Skill Rate")
+        
+        col3, col4 = st.columns([1,2])
         with col3:
-            unskill_check =st.checkbox("Unskill",key="unskill_Check")
+            st.checkbox("Unskill", key=f"unskill_chk_{ver}")
         with col4:
-            unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
- #1 Ragister Button           
-if st.button("Register Contractor",use_container_width=True):
-    #2 Validation for Required Fields
-    if not st.session_state.get("con_vendercode") or not st.session_state.get("con_sitename") or not st.session_state.get("con_worktype") or not st.session_state.get("con_cat"):
+            st.number_input("Unskill Rate*", key=f"u_rate_{ver}", min_value=0.0, format="%.2f", step=0.50, disabled=not st.session_state.get(f"unskill_chk_{ver}"), placeholder="Enter Unskill Rate")
+
+# 1 Register Button           
+if st.button("Register Contractor", use_container_width=True):
+    ver = st.session_state.form_version
+    # 2 Validation for Required Fields
+    if not st.session_state.get(f"vcode_{ver}") or not st.session_state.get(f"site_{ver}") or not st.session_state.get(f"wtype_{ver}") or not st.session_state.get(f"cat_{ver}"):
         st.error("Please fill all required fields in Basic Details.")
     else:
-    #3 Loding Message
+        # 3 Loding Message
         with st.spinner("All Data Save in DataBase..."):
             is_saved = save_contractor_smart()
             if is_saved:
-                #st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
-                st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
+                st.success(f"Contractor Registered Successfully!")
                 st.balloons()
-                connected = st.session_state.get('connected_shown', False)
-                st.session_state.clear() 
-                st.session_state.connected_shown = connected
+                # Form Reset Logic: Version badlvathi badha box khali thai jashe
+                st.session_state.form_version += 1
                 import time
                 time.sleep(1)
                 st.rerun()
             else:
                 st.error("Failed to register contractor. Please try again.")  
+
 # ૧. Reset બટન (બધા ખાના ખાલી કરવા માટે)
 if st.button("Reset Form", use_container_width=True):
-    # ૨. કનેક્શન સાચવીને બધો ડેટા મેમરીમાંથી કાઢી નાખો
-    connected = st.session_state.get('connected_shown', False)
-    st.session_state.clear() 
-    st.session_state.connected_shown = connected
-    
-    # ૩. પેજને રીફ્રેશ કરો જેથી UI માં બધું ખાલી દેખાય
+    # Version badlvathi Streamlit badha widget ne nava ganashe ane khali kari deshe
+    st.session_state.form_version += 1
     st.rerun()
