@@ -66,6 +66,11 @@ st.markdown("""
             input[type="number"] {
                 -moz-appearance: textfield !important;
             }
+            [data-testid="column"] {
+                width: unset !important;
+                flex:1 1 0% !important;
+                min-width: 0px !important;
+                }
 </style> """, unsafe_allow_html=True)
 
 st.markdown("""
