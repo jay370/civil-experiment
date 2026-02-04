@@ -9,12 +9,14 @@ client = get_gspread_client()
 
 # --- 3. HOME UI ---
 st.title("🏗️ Civil Site Home Page")
-st.write("Hello Dipak Sir")
 
 # Navigation Button
 if st.button("Contractor Registration"):
     # Pages folder mate sacho path
      st.switch_page("pages/registration.py")
+     
+if st.button("Labour Counting"):
+    st.switch_page("pages/labour_count.py")
 
 if client:
     st.sidebar.success("Database Connected ✅")
