@@ -195,7 +195,7 @@ if st.button("Register Contractor",use_container_width=True):
                 st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
-                st.session_state.clear() # form submit thaya pachi form ni value reset karva mate
+                
                 st.rerun()  # form submit thaya pachi page ne refresh karva mate
             else:
                 st.error("Failed to register contractor. Please try again.")  
