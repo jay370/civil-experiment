@@ -127,8 +127,8 @@ def save_contractor_smart():
             st.session_state.get("con_vendercode"),
             st.session_state.get("con_sitename", "").upper(),
             st.session_state.get("con_Billname", "").upper(),
-            st.session_state.get("con_worktype"),
-            st.session_state.get("con_cat"),
+            st.session_state.get("con_worktype", "").upper(),
+            st.session_state.get("con_cat", "").upper(),
             labour_1, #'True' na badle 'Skill' or khali jagaya ma sae thasehe
             labour_2, #'True' na badle 'Unskill' or khali jagaya ma sae thasehe
             s_rate, # jo 0 hashe to ahi "" save thasehe
