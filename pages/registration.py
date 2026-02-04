@@ -118,21 +118,20 @@ def save_contractor_smart():
         headers = sheet.row_values(1)
         #2. badhha data ne ek Dictionary ma taiyar karo
         #key = Header nu Name(sheet Mujab), value = User Input(st.session_state mathi)
-        data_to_save ={
-            "Date_time": datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
-            "Vender Code": st.session_state.get("con_vendercode"),
-            "Contractor SiteName": st.session_state.get("con_sitename", "").upper(),
-            "Contractor BillName": st.session_state.get("con_Billname", "").upper(), # અહીં n સ્મોલ રાખવો
-            "Contractor Worktype": st.session_state.get("con_worktype"),
-            "CATEGORY": st.session_state.get("con_cat"),
-            "SKILL RATE": st.session_state.get("skill_rate") if st.session_state.get("skill_Check") else 0,
-            "UNSKILL RATE": st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") else 0,   
-        }         
-        row_to_append = []
-        for header in headers:
-            row_to_append.append(data_to_save.get(header, ""))  # Default to empty string if key not found
-         #3. Data ne Google Sheet ma append karo
-        sheet.append_row(row_to_append)
+        # Navo data taiyar karo
+        new_row = [
+            datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
+            st.session_state.get("con_vendercode"),
+            st.session_state.get("con_sitename", "").upper(),
+            st.session_state.get("con_Billname", "").upper(),
+            st.session_state.get("con_worktype"),
+            st.session_state.get("con_cat"),
+            st.session_state.get("skill_rate") if st.session_state.get("skill_Check") else 0,
+            st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") else 0
+        ]
+        # VBA na Rows(2).Insert logic jevu kaam:
+        # Aa command 2nd number ni row (Header ni turant niche) navi row umero ane data muko
+        sheet.insert_row(new_row, index=2, value_input_option='USER_ENTERED')
         return True
     except Exception as e:
         st.error(f"Error saving data to Google Sheets: {e}")
