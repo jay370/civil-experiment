@@ -13,7 +13,7 @@ def check_connection():
 is_connected,msg = check_connection()
 
 if is_connected:
-    st.toast(msg, icon="✅")
+    st.toast(msg, icon="✅")    
 else:
     st.error(msg)
     st.info("Please check your Google Cloud credentials and internet connection.")
@@ -173,7 +173,8 @@ if st.button("Register Contractor",use_container_width=True):
     #3 Loding Message
         with st.spinner("All Data Save in DataBase..."):
             is_saved = save_contractor_smart()
-            if is_saved:     
+            if is_saved:
+                st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
             else:
