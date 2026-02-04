@@ -157,8 +157,8 @@ if st.button("Register Contractor",use_container_width=True):
     else:
     #3 Loding Message
         with st.spinner("All Data Save in DataBase..."):
-            success = save_contractor_smart()
-            if success:     
+            is_saved = save_contractor_smart()
+            if is_saved:     
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
             else:
