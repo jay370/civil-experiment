@@ -118,13 +118,27 @@ def save_contractor_smart():
         client = get_gspread_client()
         sheet = client.open("DWCS TWT").worksheet("Contractors")  # Sheet name
         
+        #1. table na Badha j record leshe header Mujab
+        # Sheet ma Niche Navu table Hashe to vadho Nahi ave
+        all_records = sheet.get_all_records()
+        
+        #2.Duplicate Vender Code Check karvo
+        new_code = st.session_state.get("con_vendercode").strip()
+        
+        #3list comprehension thi duplicate code check karvo
+        is_Duplicate = any(str(record.get("Vender Code")) == str(new_code) for record in all_records)
+        
+        if is _Duplicate:
+            st.warning(f"Vender Code {new_code} already exists. Please use a unique Vender Code.")
+            return False
+        
         labour_1 ="SKILL" if st.session_state.get("skill_Check") else ""
         labour_2 ="UNSKILL" if st.session_state.get("unskill_Check") else ""
         s_rate = st.session_state.get("skill_rate") if st.session_state.get("skill_Check") and st.session_state.get("skill_rate") != 0 else ""
         u_rate = st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") and st.session_state.get("unskill_rate") != 0 else ""
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
-            st.session_state.get("con_vendercode"),
+            st.session_state.get("con_vendercode").strip(),
             st.session_state.get("con_sitename", "").upper().strip(),
             st.session_state.get("con_Billname", "").upper().strip(),
             st.session_state.get("con_worktype", "").upper().strip(),
@@ -182,7 +196,4 @@ if st.button("Register Contractor",use_container_width=True):
                 st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
                 st.balloons()
             else:
-                st.error("Failed to register contractor. Please try again.")   
-        
-
-
+                st.error("Failed to register contractor. Please try again.")  
