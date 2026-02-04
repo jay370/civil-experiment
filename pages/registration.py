@@ -125,10 +125,10 @@ def save_contractor_smart():
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
             st.session_state.get("con_vendercode"),
-            st.session_state.get("con_sitename", "").upper(),
-            st.session_state.get("con_Billname", "").upper(),
-            st.session_state.get("con_worktype", "").upper(),
-            st.session_state.get("con_cat", "").upper(),
+            st.session_state.get("con_sitename", "").upper().strip(),
+            st.session_state.get("con_Billname", "").upper().strip(),
+            st.session_state.get("con_worktype", "").upper().strip(),
+            st.session_state.get("con_cat", "").upper().strip(),
             labour_1, #'True' na badle 'Skill' or khali jagaya ma sae thasehe
             labour_2, #'True' na badle 'Unskill' or khali jagaya ma sae thasehe
             s_rate, # jo 0 hashe to ahi "" save thasehe
