@@ -117,11 +117,9 @@ def save_contractor_smart():
     try:
         client = get_gspread_client()
         sheet = client.open("DWCS TWT").worksheet("Contractors")  # Sheet name
-        #1. pehli row (headers) melvo
-        headers = sheet.row_values(1)
-        #2. badhha data ne ek Dictionary ma taiyar karo
-        #key = Header nu Name(sheet Mujab), value = User Input(st.session_state mathi)
-        # Navo data taiyar karo
+        
+        labour_1 ="SKILL" if st.session_state.get("skill_Check") else ""
+        labour_2 ="UNSKILL" if st.session_state.get("unskill_Check") else ""
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
             st.session_state.get("con_vendercode"),
@@ -129,6 +127,8 @@ def save_contractor_smart():
             st.session_state.get("con_Billname", "").upper(),
             st.session_state.get("con_worktype"),
             st.session_state.get("con_cat"),
+            labour_1, #'True' na badle 'Skill' or khali jagaya ma sae thasehe
+            labour_2, #'True' na badle 'Unskill' or khali jagaya ma sae thasehe
             st.session_state.get("skill_rate") if st.session_state.get("skill_Check") else 0,
             st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") else 0
         ]
