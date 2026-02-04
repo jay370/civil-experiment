@@ -1,4 +1,5 @@
 import streamlit as st
+from connection import get_gspread_client
 
 # page setup for Mobile Look
 st.set_page_config(page_title="Contractor Registration", layout="centered",initial_sidebar_state="collapsed")
@@ -87,9 +88,41 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-
 #-- Tabs for Input Fields --
 tab1, tab2 = st.tabs(["Basic Details", "Bank Details"])
+
+
+
+def save_contractor_smart():
+    try:
+        client = get_gspread_client()
+        sheet = client.open("DWCS TWT").worksheet("Contractors")  # Sheet name
+        #1. pehli row (headers) melvo
+        headers = sheet.row_values(1)
+        #2. badhha data ne ek Dictionary ma taiyar karo
+        #key = Header nu Name(sheet Mujab), value = User Input(st.session_state mathi)
+        data_to_save ={
+            "Date_time": datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
+            "Vender Code": st.session_state.con_vendercode,
+            "Contractor SiteName":st.session_state.con_sitename.upper(),
+            "Contractor BillName":st.session_state.con_Billname.upper(),
+            "Contractor Worktype":st.session_state.con_worktype,
+            "CATEGORY":st.session_state.con_cat,
+            "SKILL RATE":st.session_state.skill_rate,
+            "UNSKILL RATE":st.session_state.unskill_rate,   
+        }           
+        row_to_append = []
+        for header in headers:
+            row_to_append.append(data_to_save.get(header, ""))  # Default to empty string if key not found
+         #3. Data ne Google Sheet ma append karo
+        sheet.append_row(row_to_append)
+        return True
+    except Exception as e:
+        st.error(f"Error saving data to Google Sheets: {e}")
+        return False    
+    
+
+
 
 with tab1:
     #--- This is Ractangle Box (Card) ---
@@ -122,10 +155,12 @@ if st.button("Register Contractor",use_container_width=True):
     else:
     #3 Loding Message
         with st.spinner("All Data Save in DataBase..."):
-            import time
-            time.sleep(2)  # Simulate a delay for saving data       
-            st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
-            st.balloons()   
+            success = save_contractor_smart()
+            if success:     
+                st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
+                st.balloons()
+            else:
+                st.error("Failed to register contractor. Please try again.")   
         
 with tab2:  
     st.markdown("### Register Contractor Bank Details")
