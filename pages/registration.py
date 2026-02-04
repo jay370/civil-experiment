@@ -120,14 +120,14 @@ def save_contractor_smart():
         #key = Header nu Name(sheet Mujab), value = User Input(st.session_state mathi)
         data_to_save ={
             "Date_time": datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
-            "Vender Code": st.session_state.con_vendercode,
-            "Contractor SiteName":st.session_state.con_sitename.upper(),
-            "Contractor BillName":st.session_state.con_Billname.upper(),
-            "Contractor Worktype":st.session_state.con_worktype,
-            "CATEGORY":st.session_state.con_cat,
-            "SKILL RATE":st.session_state.skill_rate,
-            "UNSKILL RATE":st.session_state.unskill_rate,   
-        }           
+            "Vender Code": st.session_state.get("con_vendercode"),
+            "Contractor SiteName": st.session_state.get("con_sitename", "").upper(),
+            "Contractor BillName": st.session_state.get("con_Billname", "").upper(), # અહીં n સ્મોલ રાખવો
+            "Contractor Worktype": st.session_state.get("con_worktype"),
+            "CATEGORY": st.session_state.get("con_cat"),
+            "SKILL RATE": st.session_state.get("skill_rate") if st.session_state.get("skill_Check") else 0,
+            "UNSKILL RATE": st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") else 0,   
+        }         
         row_to_append = []
         for header in headers:
             row_to_append.append(data_to_save.get(header, ""))  # Default to empty string if key not found
