@@ -186,7 +186,7 @@ with tab1:
 
 # 1 Register Button           
     if st.button("Register Contractor", use_container_width=True):
-    ver = st.session_state.form_version
+        ver = st.session_state.form_version
     # 2 Validation for Required Fields
     if not st.session_state.get(f"vcode_{ver}") or not st.session_state.get(f"site_{ver}") or not st.session_state.get(f"wtype_{ver}") or not st.session_state.get(f"cat_{ver}"):
         st.error("Please fill all required fields in Basic Details.")
