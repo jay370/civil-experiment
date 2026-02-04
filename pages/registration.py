@@ -128,7 +128,7 @@ def save_contractor_smart():
         #3list comprehension thi duplicate code check karvo
         is_Duplicate = any(str(record.get("Vender Code")) == str(new_code) for record in all_records)
         
-        if is _Duplicate:
+        if is_Duplicate:
             st.warning(f"Vender Code {new_code} already exists. Please use a unique Vender Code.")
             return False
         
