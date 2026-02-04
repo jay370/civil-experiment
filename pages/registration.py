@@ -3,6 +3,21 @@ import streamlit as st
 from connection import get_gspread_client
 import datetime
 
+def check_connection():
+    try:
+       client = get_gspread_client()
+       sheet = client.open("DWCS TWT").worksheet("Contractors")
+       return True, "Connected to Google Sheets"
+    except Exception as e:
+       return False, f"Connection failed: {e}"
+is_connected,msg = check_connection()
+
+if is_connected:
+    st.toast(msg, icon="✅")
+else:
+    st.error(msg)
+    st.info("Please check your Google Cloud credentials and internet connection.")
+
 # page setup for Mobile Look
 st.set_page_config(page_title="Contractor Registration", layout="centered",initial_sidebar_state="collapsed")
 
