@@ -23,7 +23,7 @@ st.title("☀️ Daily Labour Counting")
 # ૧. તારીખ અને શિફ્ટ સિલેક્શન
 col1, col2 = st.columns(2)
 with col1:
-    count_date = st.date_input("Select Date", datetime.date.today())
+    count_date = st.date_input("Select Date", datetime.date.today(),format="DD-MM-YYYY")
 with col2:
     shift = st.radio("Shift", ["Day", "Night"], horizontal=True)
 
