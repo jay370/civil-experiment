@@ -183,20 +183,23 @@ with tab1:
         with col4:
             unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
  #1 Ragister Button           
-            submitted = st.form_submit_button(
-                "Register Contractor",
-                use_container_width=True
-            )
-
-# ---------------- SUBMIT LOGIC ----------------
-if submitted:
-    if not st.session_state.get("con_vendercode") \
-       or not st.session_state.get("con_sitename") \
-       or not st.session_state.get("con_worktype") \
-       or not st.session_state.get("con_cat"):
-        st.error("Please fill all required fields.")
+if st.button("Register Contractor",use_container_width=True):
+    #2 Validation for Required Fields
+    if not st.session_state.get("con_vendercode") or not st.session_state.get("con_sitename") or not st.session_state.get("con_worktype") or not st.session_state.get("con_cat"):
+        st.error("Please fill all required fields in Basic Details.")
     else:
-        with st.spinner("Saving data..."):
-            if save_contractor_smart():
-                st.success("Contractor Registered Successfully!")
-                st.balloons() 
+    #3 Loding Message
+        with st.spinner("All Data Save in DataBase..."):
+            is_saved = save_contractor_smart()
+            if is_saved:
+                #st.write(st.session_state.to_dict()) # આનાથી બધી વેલ્યુ સ્ક્રીન પર દેખાશે     
+                st.success(f"Contractor {st.session_state.get('con_sitename')} Registered Successfully!")
+                st.balloons()
+                connected = st.session_state.get('connected_shown', False)
+                st.session_state.clear() 
+                st.session_state.connected_shown = connected
+                import time
+                time.sleep(1)
+                st.rerun()
+            else:
+                st.error("Failed to register contractor. Please try again.")  
