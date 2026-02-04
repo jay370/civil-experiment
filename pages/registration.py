@@ -9,7 +9,7 @@ def check_connection():
     try:
        client = get_gspread_client()
        sheet = client.open("DWCS TWT").worksheet("Contractors")
-       return True, "Connected to Google Sheets"
+       return True, "Connected to Database successfully!"
     except Exception as e:
        return False, f"Connection failed: {e}"
 is_connected,msg = check_connection()
