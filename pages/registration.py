@@ -3,6 +3,8 @@ import streamlit as st
 from connection import get_gspread_client
 import datetime
 
+#a Line USe karvi varmvar raun Nahi thay
+@st.cache_resource(show_spinner="Connecting to Database...")
 def check_connection():
     try:
        client = get_gspread_client()
@@ -12,9 +14,10 @@ def check_connection():
        return False, f"Connection failed: {e}"
 is_connected,msg = check_connection()
 
-if is_connected:
+if is_connected and 'connected_shown' not in st.session_state:
+    st.session_state.connected_shown = True
     st.toast(msg, icon="✅")    
-else:
+elif not is_connected:
     st.error(msg)
     st.info("Please check your Google Cloud credentials and internet connection.")
 
