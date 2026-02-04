@@ -184,6 +184,5 @@ if st.button("Register Contractor",use_container_width=True):
             else:
                 st.error("Failed to register contractor. Please try again.")   
         
-with tab2:  
-    st.markdown("### Register Contractor Bank Details")
+
 
