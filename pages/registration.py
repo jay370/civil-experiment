@@ -203,3 +203,12 @@ if st.button("Register Contractor",use_container_width=True):
                 st.rerun()
             else:
                 st.error("Failed to register contractor. Please try again.")  
+# ૧. Reset બટન (બધા ખાના ખાલી કરવા માટે)
+if st.button("Reset Form", use_container_width=True):
+    # ૨. કનેક્શન સાચવીને બધો ડેટા મેમરીમાંથી કાઢી નાખો
+    connected = st.session_state.get('connected_shown', False)
+    st.session_state.clear() 
+    st.session_state.connected_shown = connected
+    
+    # ૩. પેજને રીફ્રેશ કરો જેથી UI માં બધું ખાલી દેખાય
+    st.rerun()
