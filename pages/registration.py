@@ -95,12 +95,10 @@ with tab1:
     #--- This is Ractangle Box (Card) ---
     with st.container(border=True): 
         con_vendercode = st.number_input("Contractor Vender Code*",key="con_vendercode", placeholder="Enter Contractor Vender Code")
-        col1,col2,col3 = st.columns([4,1,4])
+        col1,col2 = st.columns([1,1])
         with col1:
              con_sitename = st.text_input("Contractor Site Name*",key="con_sitename", placeholder="Enter Contractor Site Name")
         with col2:
-             st.markdown("<br><p style='text-align: center; font-weight: white; font-size: 25px;'>AKA</p>", unsafe_allow_html=True)
-        with col3:
             con_Billname = st.text_input("Contractor Bill Name",key="con_Billname", placeholder="Enter Contractor Bill Name")
         work_Option =["Regular","Naka"]
         con_worktype = st.selectbox("Contractor Work Type*",key="con_worktype", options=work_Option, index=None, help="Refular or Naka Work Type")
