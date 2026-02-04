@@ -8,7 +8,7 @@ st.set_page_config(page_title="Labour Counting", layout="centered")
 # --- CSS for Mobile Look ---
 st.markdown("""
     <style>
-    .stApp { background-color: #F0F2F6; }
+    .stApp { background-color: #007AFF; }
     div[data-testid="stVerticalBlockBorderWrapper"] {
         background-color: #007AFF;
         border-radius: 15px;
