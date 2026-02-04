@@ -138,7 +138,7 @@ def save_contractor_smart():
         u_rate = st.session_state.get("unskill_rate") if st.session_state.get("unskill_Check") and st.session_state.get("unskill_rate") != 0 else ""
         new_row = [
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), 
-            st.session_state.get("con_vendercode").strip(),
+            new_code,
             st.session_state.get("con_sitename", "").upper().strip(),
             st.session_state.get("con_Billname", "").upper().strip(),
             st.session_state.get("con_worktype", "").upper().strip(),
