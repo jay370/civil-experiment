@@ -123,7 +123,7 @@ def save_contractor_smart():
         all_records = sheet.get_all_records()
         
         #2.Duplicate Vender Code Check karvo
-        new_code = st.session_state.get("con_vendercode").strip()
+        new_code = str(st.session_state.get("con_vendercode"))
         
         #3list comprehension thi duplicate code check karvo
         is_Duplicate = any(str(record.get("Vender Code", "")) == str(new_code) for record in all_records)
