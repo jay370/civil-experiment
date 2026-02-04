@@ -183,7 +183,7 @@ with tab1:
         with col4:
             unskill_rate = st.number_input("Unskill Rate*",key="unskill_rate", min_value=0.0, format="%.2f", step=0.50,disabled=not unskill_check, placeholder="Enter Unskill Rate")
  #1 Ragister Button           
-        submitted = st.form_submit_button(
+            submitted = st.form_submit_button(
                 "Register Contractor",
                 use_container_width=True
             )
