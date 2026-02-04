@@ -10,7 +10,7 @@ st.markdown("""
     <style>
     .stApp { background-color: #F0F2F6; }
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        background-color: #ffffff;
+        background-color: #007AFF;
         border-radius: 15px;
         padding: 15px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
